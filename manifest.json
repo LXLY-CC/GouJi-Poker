@@ -1,0 +1,21 @@
+{
+  "entry": "index.html",
+  "format": 1,
+  "id": "01900000-0000-7000-8000-000000000000",
+  "media": {},
+  "name": "够级规则和玩法介绍",
+  "permissions": [
+    "user.read",
+    "theme.read",
+    "storage.read",
+    "storage.write"
+  ],
+  "script": "app.js",
+  "style": "app.css",
+  "tags": [
+    "游戏",
+    "卡牌",
+    "工具"
+  ],
+  "version": "1.0.0"
+}

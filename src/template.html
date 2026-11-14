@@ -1,0 +1,355 @@
+<main class="guide">
+  <p class="guide__connection" id="connection" role="status" data-text="playerLoading"></p>
+  <header class="guide__header">
+    <div>
+      <h1>够级规则和玩法介绍</h1>
+      <p data-text="tagline"></p>
+      <p class="guide__origin">山东民间扑克 · 青岛起源 · 20 世纪 60 年代起源于青岛沧口</p>
+    </div>
+  </header>
+  <div class="guide__player">
+    <div>
+      <strong id="player" data-text="playerLoading"></strong><span data-text="identity"></span>
+    </div>
+    <button id="refresh" type="button" data-text="refresh"></button>
+  </div>
+  <ul class="guide__stats" aria-label="够级速览">
+    <li><strong>6 人</strong><span>对局人数</span></li>
+    <li><strong>4 副牌 · 216 张</strong><span>经典打法</span></li>
+    <li><strong>每人 36 张</strong><span>经典打法</span></li>
+    <li><strong>3 人一帮</strong><span>「联邦」</span></li>
+    <li><strong>六副带鹰 · 324 张</strong><span>枣庄、滕州一带</span></li>
+  </ul>
+  <p class="guide__lede">六个人、四副牌、两个「联邦」隔座对垒。够级的核心只有一句话：你打出一手够大的牌，就只有坐在对面的人有资格接招——其余四人只能看戏，除非有人「烧牌」搅局。从争头科到进贡，一篇看懂。</p>
+  <nav class="guide__nav" aria-label="章节导航">
+    <a href="#overview" data-section="overview">一分钟看懂</a>
+    <a href="#ranking" data-section="ranking">牌面大小</a>
+    <a href="#gouji-cards" data-section="gouji-cards">够级牌判定</a>
+    <a href="#flow" data-section="flow">一局流程</a>
+    <a href="#core-rules" data-section="core-rules">核心规则</a>
+    <a href="#scoring" data-section="scoring">名次计分</a>
+    <a href="#tribute" data-section="tribute">进贡</a>
+    <a href="#six-decks" data-section="six-decks">六副牌带鹰</a>
+    <a href="#terms" data-section="terms">术语表</a>
+    <a href="#tips" data-section="tips">新手技巧</a>
+    <a href="#faq" data-section="faq">常见问题</a>
+  </nav>
+
+  <section id="overview" aria-labelledby="overview-title">
+    <h2 id="overview-title">壹 · 一分钟看懂：谁和谁是一伙的</h2>
+    <p>6 人围桌而坐，交叉落座：间隔的 3 人组成一个<strong>联邦</strong>（一帮），两个联邦互为对手。坐在你正对面的人是你的<strong>对头</strong>——够级时唯一能正面接你牌的人。点一点座位，看清关系。</p>
+    <div class="seatmap" id="seatmap" role="group" aria-label="牌桌座位图">
+      <button type="button" class="seatmap__seat" data-seat="1">玩家 1</button>
+      <button type="button" class="seatmap__seat" data-seat="2">玩家 2</button>
+      <button type="button" class="seatmap__seat" data-seat="3">玩家 3</button>
+      <button type="button" class="seatmap__seat" data-seat="4">玩家 4</button>
+      <button type="button" class="seatmap__seat" data-seat="5">玩家 5</button>
+      <button type="button" class="seatmap__seat" data-seat="6">玩家 6</button>
+    </div>
+    <ul class="seatmap__legend">
+      <li><span class="seatmap__dot seatmap__dot--a"></span>联邦甲：玩家 1、3、5</li>
+      <li><span class="seatmap__dot seatmap__dot--b"></span>联邦乙：玩家 2、4、6</li>
+      <li><span class="seatmap__dot seatmap__dot--opponent"></span>选中者的对头</li>
+      <li><span class="seatmap__dot seatmap__dot--mate"></span>选中者的联邦队友</li>
+    </ul>
+    <p class="tool__result" id="seat-explain" role="status" data-text="seatHint"></p>
+    <h3>🎯 目标：争科</h3>
+    <p>按逆时针轮流出牌，用更大的同类型牌压住上家。先把 36 张牌出完的人胜出，名次依次叫头科、二科、三科、四科、二落、大落。</p>
+    <h3>🤝 个人输赢，联邦算账</h3>
+    <p>出牌顺序看个人，但计分、进贡都按联邦来：掩护队友先走、合力把对方对头「捉落」，才是够级的精髓。</p>
+    <h3>🔥 变数：烧牌</h3>
+    <p>别人打够级牌时，本来只有对头能接；但任何满足条件的人可以喊「烧」抢先接牌——代价是之后每手牌都得挂一张王。</p>
+  </section>
+
+  <section id="ranking" aria-labelledby="ranking-title">
+    <h2 id="ranking-title">贰 · 牌面大小：只看点数，不看花色</h2>
+    <p>够级不论花色，只比点数。从大到小排成一条梯子，3 最小，王最大。出牌只能出<strong>同点数</strong>的组合（一张、或多张同点），并用张数相同、点数更大的组合压上家。</p>
+    <ol class="ladder" reversed>
+      <li><strong>大王</strong><span>大花 · 大虎</span></li>
+      <li><strong>小王</strong><span>小花 · 小虎</span></li>
+      <li><strong>2</strong><span>钱 · 两</span></li>
+      <li><strong>A</strong><span>帽子</span></li>
+      <li><strong>K</strong><span>老 K</span></li>
+      <li><strong>Q</strong><span>—</span></li>
+      <li><strong>J</strong><span>—</span></li>
+      <li><strong>10</strong><span>—</span></li>
+      <li><strong>9</strong><span>—</span></li>
+      <li><strong>8</strong><span>—</span></li>
+      <li><strong>7</strong><span>—</span></li>
+      <li><strong>6</strong><span>—</span></li>
+      <li><strong>5</strong><span>—</span></li>
+      <li><strong>4</strong><span>—</span></li>
+      <li><strong>3</strong><span>最小</span></li>
+    </ol>
+    <p>牌面绰号是够级的「方言」：王叫花（虎），2 叫钱，A 叫帽子——先认牌，才听得懂牌桌上在说什么。</p>
+    <h3>出牌与压牌</h3>
+    <ul>
+      <li>按<strong>逆时针</strong>顺序轮流出牌，不能越位、不能抢出。</li>
+      <li>压牌必须<strong>张数相同、点数更大</strong>：对家出 3 张 8，你只能用 3 张 9 以上去压。</li>
+      <li>不想压（或压不起）就说「过」。</li>
+      <li><strong>过牌不准上</strong>：这一轮你一旦过牌，之后再轮到也不能反悔补上——除非你的对头打出了够级牌。</li>
+      <li>一圈都过，最后出牌的人领出下一轮新牌。</li>
+    </ul>
+    <h3>特殊的「3」</h3>
+    <ul>
+      <li><strong>亮 3 上班</strong>：抓牌时，先亮出两张同花色 3 的人拿到首局首发权；后面有人亮出的同色 3 更多，还可以「顶班」抢走。</li>
+      <li><strong>憋 3</strong>（部分地方打法）：手里的 3 必须留到最后才能出，开局先查「买 3」——没 3 的人要用 2 或王向对头买一张 3。</li>
+      <li>3 虽然最小，却决定了谁先手、也常常是最后卡住大落的那一张。</li>
+    </ul>
+  </section>
+
+  <section id="gouji-cards" aria-labelledby="gouji-cards-title">
+    <h2 id="gouji-cards-title">叁 · 够级牌：全篇最重要的一张表</h2>
+    <p>一手牌「够不够级」，看点数和张数有没有达到门槛。达到门槛的牌叫<strong>够级牌</strong>：它一出手，牌桌立刻进入「够级状态」——除了烧牌，只有出牌者的<strong>对头</strong>能上牌，其他四人全部停手；对头若过牌，出牌者直接领出下一轮。</p>
+    <table>
+      <thead><tr><th scope="col">点数</th><th scope="col">最低张数</th><th scope="col">记忆口诀 / 说明</th></tr></thead>
+      <tbody>
+        <tr><td>大王 / 小王</td><td>1 张</td><td>单张即够级；任何一手牌里<strong>挂了王</strong>（带一张王），整手都算够级牌</td></tr>
+        <tr><td>2（钱）</td><td>1 张</td><td>单张 2 就是够级牌，所以 2 从不轻易单出</td></tr>
+        <tr><td>A（帽子）</td><td>2 张</td><td>一对 A 起步</td></tr>
+        <tr><td>K（老 K）</td><td>2 张</td><td>一对 K 起步</td></tr>
+        <tr><td>Q</td><td>3 张</td><td>三张 Q 起步</td></tr>
+        <tr><td>J</td><td>4 张</td><td>四张 J 起步</td></tr>
+        <tr><td>10</td><td>5 张</td><td>五张 10 起步</td></tr>
+        <tr><td>9 及以下</td><td>—</td><td>张数再多也不够级（除非挂王）</td></tr>
+      </tbody>
+    </table>
+    <p>口诀：<strong>「单钱单花、双 A 双 K、三 Q、四 J、五 10」</strong>。张数超过门槛的同点牌（如 6 张 10、3 张 K）当然也都是够级牌。压够级牌同样要张数相同、点数更大。</p>
+    <div class="tool" aria-labelledby="checker-title">
+      <h3 id="checker-title">🧮 练一练：这手牌够级吗？</h3>
+      <label class="tool__label" for="checker-rank">选择点数</label>
+      <select id="checker-rank">
+        <option value="10">10</option>
+        <option value="J">J</option>
+        <option value="Q">Q</option>
+        <option value="K">K</option>
+        <option value="A">A</option>
+        <option value="2">2（钱）</option>
+        <option value="small-joker">小王</option>
+        <option value="big-joker">大王</option>
+        <option value="9">9</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+        <option value="6">6</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+      </select>
+      <div class="tool__row">
+        <span class="tool__label" id="checker-count-label">张数</span>
+        <div class="tool__stepper" role="group" aria-labelledby="checker-count-label">
+          <button type="button" id="checker-minus" aria-label="减少一张">−</button>
+          <strong id="checker-count" aria-live="polite">2</strong>
+          <button type="button" id="checker-plus" aria-label="增加一张">＋</button>
+        </div>
+      </div>
+      <label class="tool__check"><input type="checkbox" id="checker-wang" />这手牌里挂了一张王（大王或小王）</label>
+      <p class="tool__result" id="checker-result" role="status"></p>
+    </div>
+  </section>
+
+  <section id="flow" aria-labelledby="flow-title">
+    <h2 id="flow-title">肆 · 一局的流程</h2>
+    <p>从洗牌到进贡，一局够级大致走完这五步。第二局起，上一局的落科要先给科进贡，再开新局。</p>
+    <ol class="steps">
+      <li><strong>抓牌亮 3</strong>：4 副牌共 216 张洗匀，轮流抓牌，每人 36 张。抓牌中亮出同色 3 最多者「上班」，拿首发权。</li>
+      <li><strong>进贡还贡</strong>：第二局起，先结算上一局的贡：大落、二落把手里最大的牌贡给头科、二科，吃贡方再还回等量的牌（部分贡不用还，见「进贡」一节）。</li>
+      <li><strong>顺牌争科</strong>：首发者领出，逆时针压牌。普通牌人人可压；够级牌只有对头能接。大家的目标是抢在对头前面出完牌，先后决出头科、二科。</li>
+      <li><strong>四户乱缠</strong>：头科、二科产生后，剩下的 4 人不再受够级、过牌、烧牌等限制，按顺序正常压牌即可，依次决出三科、四科、二落、大落。</li>
+      <li><strong>计分结算</strong>：按名次给双方联邦计分；玩进贡打法的，则记下谁欠谁的贡，留到下一局开局时兑现。</li>
+    </ol>
+  </section>
+
+  <section id="core-rules" aria-labelledby="core-rules-title">
+    <h2 id="core-rules-title">伍 · 核心规则详解</h2>
+    <p>够级的味道全在这几条里。各地细则略有出入（文末有说明），但骨架一致。</p>
+    <h3>开点：先「开点」，才有资格烧牌</h3>
+    <p>本局中，你打出的够级牌<strong>成功过关</strong>（没被对头压住、或对头过牌后由你领出新一轮），就算<strong>开点</strong>了。没开点的人不能烧牌——这是防止一上来就乱烧的门槛。有的地方采用「开点发 4」的简化口径：没开点又想烧牌，第一手先打一张 4 表明态度，再按烧牌规矩走。</p>
+    <h3>烧牌：抢接别人的够级牌</h3>
+    <ul>
+      <li><strong>时机</strong>：任何人打出够级牌时，非对头的人可以抢先声明「烧」。烧牌优先于对头接牌；多人要烧时，<strong>出牌者一方的联邦优先</strong>，同方多人则按出牌顺序。</li>
+      <li><strong>条件</strong>：① 你必须已经开点；② 先用一手更大的同型牌<strong>盖住</strong>这手够级牌；③ 从下一手起，<strong>你打出的每一手牌都必须挂一张王</strong>（大王或小王均可），只有最后一手可以不挂。若盖住之后手里只剩一手同点牌，也可以直接烧完。</li>
+      <li><strong>烧成功</strong>：按上面的规矩一口气出完所有牌，名次按走科顺序算，被烧的人往往被打乱节奏。进贡打法里，被烧者下一局要给烧牌者进一张「烧贡」。</li>
+      <li><strong>解烧 / 反烧</strong>：烧牌途中，你的牌被对头压住、或被别人再烧，烧牌即被打断，按正常顺序继续。若烧牌者中途没挂王、违规出牌，则判<strong>烧失败</strong>，直接按大落一带论处且本局不能再出牌——喊烧之前先数清自己的王。</li>
+    </ul>
+    <h3>让牌：把接牌的机会让给下家试探</h3>
+    <p>轮到你压上家的牌时，如果这手牌是你<strong>对头</strong>出的、且中间两家都已经过牌，你可以声明「让牌」：先让你的下两家表态，他们都过牌后，再由你决定压还是过。让牌后只有你的对头那条线能继续上牌——常用在试探对头虚实、或给联邦队友留机会时。</p>
+    <h3>够死级与闷牌：最后一手的攻防</h3>
+    <ul>
+      <li><strong>底牌</strong>：每人最后出的一手牌叫底牌。头科、二科的底牌若是够级牌，其对头获得<strong>一次</strong>接这手「死级」的机会；接住并出完可改写名次，接不住则名次定局。</li>
+      <li><strong>闷牌</strong>：一方出底牌时被对头正好压住、反被对方抢先走科，自己反成落科，俗称被「闷」。进贡打法中，被闷者要进一张「闷贡」，且闷贡排在所有贡的最前面、不用还贡。</li>
+    </ul>
+    <p>所以手里剩最后一手时，别急着甩：先算对头手里还剩几张、有没有大过你的牌。</p>
+    <h3>革命：烂牌的翻身通道（部分打法）</h3>
+    <p>个别地方规则设有「革命」：抓完牌后若手里没有 3、也拿不出 2 或王去「买 3」，可声明革命，本局按四科论处、免于落科。各桌是否启用，开局前先说好；采用买 3 / 憋 3 打法的桌子更常见。</p>
+  </section>
+
+  <section id="scoring" aria-labelledby="scoring-title">
+    <h2 id="scoring-title">陆 · 名次与计分</h2>
+    <p>名次按出完牌的先后定，积分按联邦汇总：把本方 3 人的分数相加，<strong>只记正分、不记负分</strong>（合计为负时记 0）。</p>
+    <table>
+      <thead><tr><th scope="col">名次</th><th scope="col">含义</th><th scope="col">得分</th></tr></thead>
+      <tbody>
+        <tr><td>头科</td><td>第一个出完牌</td><td>＋4</td></tr>
+        <tr><td>二科</td><td>第二个出完牌</td><td>＋2</td></tr>
+        <tr><td>三科</td><td>第三个出完牌</td><td>0</td></tr>
+        <tr><td>四科</td><td>第四个出完牌</td><td>0</td></tr>
+        <tr><td>二落</td><td>第五个出完牌（倒数第二）</td><td>－2</td></tr>
+        <tr><td>大落</td><td>最后一个，读 lá，俗称「大拉」</td><td>－4</td></tr>
+      </tbody>
+    </table>
+    <h3>串三户（圈三户）</h3>
+    <p>若一方联邦包揽<strong>头科、二科、三科</strong>，对方三人全军覆没，称「串三户」。本局该联邦得分<strong>翻倍</strong>：4＋2＋0＝6 分 ×2 ＝<strong>12 分</strong>。这是够级里最提气、也最伤士气的一局。</p>
+    <h3>走科与保落</h3>
+    <p>二科产生前叫「争科」阶段，全力抢名次；二科之后转为「捉落 / 保落」阶段：领先的联邦想方设法把对方一人按在大落，落后一方则拼命掩护队友脱离落科。</p>
+    <div class="tool" aria-labelledby="score-title">
+      <h3 id="score-title">🧮 计分器：算算你方这一局得几分</h3>
+      <div class="tool__grid">
+        <label class="tool__label" for="calc-a">队友一的名次</label>
+        <select id="calc-a">
+          <option value="头科">头科（＋4）</option>
+          <option value="二科">二科（＋2）</option>
+          <option value="三科" selected>三科（0）</option>
+          <option value="四科">四科（0）</option>
+          <option value="二落">二落（－2）</option>
+          <option value="大落">大落（－4）</option>
+        </select>
+        <label class="tool__label" for="calc-b">队友二的名次</label>
+        <select id="calc-b">
+          <option value="头科">头科（＋4）</option>
+          <option value="二科" selected>二科（＋2）</option>
+          <option value="三科">三科（0）</option>
+          <option value="四科">四科（0）</option>
+          <option value="二落">二落（－2）</option>
+          <option value="大落">大落（－4）</option>
+        </select>
+        <label class="tool__label" for="calc-c">你的名次</label>
+        <select id="calc-c">
+          <option value="头科" selected>头科（＋4）</option>
+          <option value="二科">二科（＋2）</option>
+          <option value="三科">三科（0）</option>
+          <option value="四科">四科（0）</option>
+          <option value="二落">二落（－2）</option>
+          <option value="大落">大落（－4）</option>
+        </select>
+      </div>
+      <p class="tool__result" id="score-result" role="status"></p>
+    </div>
+  </section>
+
+  <section id="tribute" aria-labelledby="tribute-title">
+    <h2 id="tribute-title">柒 · 进贡：上一局的账，下一局还</h2>
+    <p>进贡打法里，输赢不记分、记「贡」：下一局抓完牌后，欠贡的人把手里<strong>最大的牌</strong>（按大王＞小王＞2 的顺序取）交给收贡的人。法定贡牌只认大王、小王和 2，没有这三样则可免贡。贡分四种，兑现顺序从上到下：</p>
+    <ol class="tributes">
+      <li><strong>闷贡</strong> <span>第一位 · 不用还贡</span>：被对头「闷」住而落科的人，向闷他的人进 1 张。闷局罕见，所以排面最大。</li>
+      <li><strong>烧贡</strong> <span>第二位 · 不用还贡</span>：被烧牌成功的人，向烧牌者进 1 张；若是被「反烧」翻盘，烧贡翻倍。</li>
+      <li><strong>点贡</strong> <span>第三位 · 不用还贡</span>：整局没能开点的人，向对头进 1 张。连局不开点，点贡还会逐局累加。</li>
+      <li><strong>落贡</strong> <span>第四位 · 需要还贡</span>：大落向头科进 2 张、二落向二科进 1 张；三科、四科不进也不吃。收贡方须<strong>还贡</strong>：回给对方等量的牌，还牌点数不能高于对方回敬的上限，联邦内部落贡有的桌子可免。</li>
+    </ol>
+    <p>💡 <strong>还贡的小心思</strong>：还回去的牌通常挑没用的小牌，但别还得太「刻意」——还贡的牌点有上限约束（一般不超过 10），且若对方没有与还贡同点的牌，还贡者要受罚贡。开局前把还贡口径对齐，能少很多争执。</p>
+  </section>
+
+  <section id="six-decks" aria-labelledby="six-decks-title">
+    <h2 id="six-decks-title">捌 · 六副牌带鹰：枣庄、滕州一带的重装打法</h2>
+    <p>本指南主线是青岛经典四副牌；而在山东<strong>枣庄、滕州</strong>一带，上桌默认的是<strong>六副牌</strong>：还是 6 人、两个联邦，但牌量从 216 张涨到<strong>324 张</strong>，每人 54 张。再加上够级专用牌里带的「鹰」，就是这套打法和经典打法最不一样的两个地方。骨架（联邦、对头、够级、烧牌）完全不变，变的是牌量、买 3 和开点的口径。</p>
+    <table>
+      <thead><tr><th scope="col">项目</th><th scope="col">经典四副（本指南主线）</th><th scope="col">六副牌带鹰</th></tr></thead>
+      <tbody>
+        <tr><td>用牌总数</td><td>4 副 · 216 张</td><td>6 副 · <strong>324 张</strong>（个别线上房去掉 18 张 3，用 306 张）</td></tr>
+        <tr><td>每人手牌</td><td>36 张</td><td>54 张（306 张口径为 51 张）</td></tr>
+        <tr><td>大小王</td><td>各 4 张，共 8 张</td><td>各 6 张，共 12 张；另有鹰 6 张，入不入局先约定</td></tr>
+        <tr><td>牌面顺序</td><td>大王＞小王＞2＞A＞…＞3</td><td>不变；若鹰入局，多数桌把鹰排在大小王之前（见下）</td></tr>
+        <tr><td>够级门槛</td><td>单 2、双 A / 双 K、三 Q、四 J、五 10</td><td>门槛不变，但牌多，大套牌常见——十几张同点压牌并不稀奇</td></tr>
+        <tr><td>3 的处理</td><td>亮 3 上班，部分桌憋 3</td><td><strong>买 3 是常态</strong>：没 3 要用 2 或王向对头买一张 3</td></tr>
+        <tr><td>一局节奏</td><td>36 张手牌，快打快结</td><td>每人多 18 张，局时明显更长，更拼记牌和联邦配合</td></tr>
+      </tbody>
+    </table>
+    <h3>🦅 「鹰」到底是什么牌</h3>
+    <p>山东够级专用扑克和普通扑克不一样：牌背印着雄鹰图案（分「白边鹰」「满色鹰」两种背纹），而且<strong>每副另带一张印着雄鹰的牌</strong>。所以老牌友买牌时总说「要带鹰的」，指的就是这种够级专用牌。六副凑上桌，正牌 324 张，另有<strong>6 张鹰</strong>——这就是「六副牌带鹰」这个叫法的由来。</p>
+    <h3>鹰怎么打：先约定，再开局</h3>
+    <p><strong>鹰没有全国统一的点数</strong>，各桌口径主要有三种，开局前必须先对齐：</p>
+    <ol>
+      <li><strong>当「鹰王」打</strong>（最常见）：鹰是全场最大的牌，排在<strong>大王之前</strong>；单张鹰即够级牌，也能像王一样挂进任何一手牌；进贡时鹰是最大的贡牌，先于大王。</li>
+      <li><strong>当大王打</strong>：鹰直接等同大花，规则不用另学，新手桌常用。</li>
+      <li><strong>不入局</strong>：洗牌前把 6 张鹰挑出来，只打 324 张正牌——不少人口中的「带鹰」只是买了带鹰的牌，打法仍是标准六副。</li>
+    </ol>
+    <h3>买 3 与革命：六副牌的开局第一件事</h3>
+    <p>发完 54 张牌先查 3：手里<strong>没有 3</strong>，要用一张 2 或王向<strong>对头买 3</strong>；对头没有 3、或只剩一张 3，则依次向对头所在的联邦买，再买不到就向自己的联邦要。若既没 3、手里又没有 2 和王可买，则<strong>自动革命</strong>，本局按四科论处、免于落科。（个别线上六副房不设革命，以开局约定为准。）</p>
+    <h3>两个房型：枣庄不憋 3 房 vs 滕州憋 3 房</h3>
+    <ul>
+      <li><strong>不憋 3（枣庄口径）</strong>：够级门槛与经典相同——一张花或 2、双 A 双 K、三 Q、四 J、五张 10 以上都能开点；贡有<strong>烧贡、点贡、落贡</strong>。</li>
+      <li><strong>憋 3（滕州口径）</strong>：每人至少留一张 3 到<strong>最后一手</strong>才能出，另设<strong>憋贡</strong>；十张以上的同点牌也算够级牌；开点更严，须打出纯够级牌后<strong>再发一张 4 才算开点</strong>（俗称「开点发 4」）；进贡时只还落贡。</li>
+    </ul>
+    <h3>牌多了一半，玩法重心也变了</h3>
+    <ul>
+      <li><strong>王更多，烧牌更常见</strong>：大小王从 8 张涨到 12 张，烧牌要凑的「每手挂王」更容易凑齐，敢烧、能烧的人更多——数王比四副牌时更要紧。</li>
+      <li><strong>大套牌压人</strong>：每个点数的牌从 16 张涨到 24 张，一手十几张同点很常见，普通牌也能压得对头喘不过气，够级牌的「独占接牌」价值相对下降。</li>
+      <li><strong>记牌先记大件</strong>：324 张全记不现实，先盯住 12 张王、24 张 2 和 6 张鹰的去向，再留意对头还剩多少张牌。</li>
+    </ul>
+    <p>🦅 <strong>上桌先问三句</strong>：鹰入不入局、当不当鹰王？憋不憋 3？贡怎么算（烧贡、点贡、憋贡要不要）？六副牌带鹰的争议十有八九出在这三处——问清楚再抓牌，比什么技巧都管用。</p>
+  </section>
+
+  <section id="terms" aria-labelledby="terms-title">
+    <h2 id="terms-title">玖 · 术语表：听懂牌桌黑话</h2>
+    <dl class="terms">
+      <div><dt>联邦</dt><dd>间隔而坐的 3 人同盟，相当于「我们帮」。够级是团队游戏，联邦配合高于个人英雄主义。</dd></div>
+      <div><dt>对头（对门）</dt><dd>正对面的对手，你的够级牌只有他能正面接；你欠的点贡、落贡也多半和他有关。</dd></div>
+      <div><dt>上家 / 下家</dt><dd>左邻称上家（上手），右邻称下家（下手）；出牌逆时针，你出的牌先经下家这一关。</dd></div>
+      <div><dt>花 / 虎</dt><dd>王的别称：大王叫大花（大虎、大画），小王叫小花（小虎），各地叫法不同，指的都是大小王。</dd></div>
+      <div><dt>钱</dt><dd>2 的别称，也叫「两」。单张 2 即够级牌，是仅次于王的硬通货。</dd></div>
+      <div><dt>帽子</dt><dd>A 的别称。一对 A 起步够级，拆单 A 出牌要慎重。</dd></div>
+      <div><dt>开点</dt><dd>本局打出过一手成功过关的够级牌。未开点不能烧牌，还可能欠点贡。</dd></div>
+      <div><dt>烧牌</dt><dd>非对头抢接够级牌，之后每手挂王直至出完。成功风光，失败直接按大落论处。</dd></div>
+      <div><dt>解烧</dt><dd>烧牌途中被压住或被再烧，烧牌被打断，恢复正常出牌秩序。</dd></div>
+      <div><dt>让牌</dt><dd>把压对头牌的机会先让给下两家表态，都过之后再由自己定夺。</dd></div>
+      <div><dt>过牌不准上</dt><dd>一轮中过牌后不得反悔补上，除非对头打了够级牌，重新给你机会。</dd></div>
+      <div><dt>四户乱缠</dt><dd>头科、二科产生后，剩余 4 人解除够级、烧牌等特殊限制，正常压牌决名次。</dd></div>
+      <div><dt>够死级</dt><dd>头科、二科的够级底牌，给对头留的一次翻盘接牌机会。</dd></div>
+      <div><dt>串三户</dt><dd>一方包揽头、二、三科，对方全员陪跑，积分翻倍记 12 分。</dd></div>
+      <div><dt>憋 3</dt><dd>一种流行打法：3 必须留到最后出，没 3 要先买 3，节奏和经典打法差别很大。</dd></div>
+      <div><dt>鹰</dt><dd>够级专用牌带的雄鹰牌，每副一张、六副共六张。地位各桌不同：常见当作大过王的「鹰王」，也有当大王或洗牌前挑出不用的，见「六副牌带鹰」一节。</dd></div>
+      <div><dt>买 3</dt><dd>发完牌手里没 3，用一张 2 或王向对头换一张 3；买不到再向双方联邦要。六副牌打法里几乎每局都要走一遍。</dd></div>
+    </dl>
+  </section>
+
+  <section id="tips" aria-labelledby="tips-title">
+    <h2 id="tips-title">拾 · 新手上桌的六个要点</h2>
+    <ol class="steps">
+      <li><strong>先保开点，再谈进攻</strong>：手里有够级牌别攒着等「一鸣惊人」。早开点才解锁烧牌资格，也免了点贡。尤其是对头弱的时候，一对 K 就能探路。</li>
+      <li><strong>王要花在刀刃上</strong>：王既是最大的单牌、又是烧牌的「燃料」，还是挂王成够级的钥匙。36 张牌里王就那么些，出手前想清楚它这一局的用途。</li>
+      <li><strong>记牌先记「大件」</strong>：不用背下 216 张。先盯住大小王和 2 出了多少、对头手里还剩几张——临近收官时，这决定你敢不敢打够级、敢不敢烧。</li>
+      <li><strong>给联邦让路</strong>：队友明显在冲科时，不要用大牌压自己人「抢风头」；该过就过，该让就让。联邦三人同进同退，赢一分是三个人的。</li>
+      <li><strong>烧牌之前先数王</strong>：烧牌要连续挂王到出完，中间断一手就是烧失败按大落论处。喊「烧」之前，把剩余手牌分成几手、每手配一张王，算明白再开口。</li>
+      <li><strong>底牌留一手心眼</strong>：最后一手尽量留够级牌或大牌：一来防被闷，二来头科、二科的够级底牌还有「够死级」的讲究，别让对头白捡翻盘机会。</li>
+    </ol>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">拾壹 · 常见问题</h2>
+    <details>
+      <summary>够级到底用 4 副牌还是 6 副牌？</summary>
+      <p>两种都有，本指南以流传最广的<strong>经典 4 副打法</strong>（216 张、每人 36 张）为准。枣庄、滕州一带流行<strong>6 副牌打法</strong>（324 张、每人 54 张），且多用带鹰的够级专用牌，买 3、憋 3、开点的细则都有变化，上文「六副牌带鹰」一节有专门对照。换桌打牌时，先问清用几副牌、鹰入不入局、憋不憋 3、进不进贡，再开局。</p>
+    </details>
+    <details>
+      <summary>为什么别人打够级牌时，我有更大的牌也不能接？</summary>
+      <p>这正是「够级」二字的来历：打出够级牌，等于向对头单挑，其余人进入「休战」状态。只有两种例外——满足条件者可以<strong>烧牌</strong>抢接；或者出牌者已经是「无头」状态（对头已走科）时，人人可接。头科、二科产生进入四户乱缠后，限制也随之解除。</p>
+    </details>
+    <details>
+      <summary>「无头」是什么意思？</summary>
+      <p>当一人的对头已经走科（出局），他就失去了专属的接牌人，称为「无头」。无头者打出的够级牌<strong>任何人都可以压</strong>，同时他也不能烧牌、不会被烧。出局顺序改变了对位关系，所以中盘要随时留意谁已无头。</p>
+    </details>
+    <details>
+      <summary>积分制和进贡制选哪种？</summary>
+      <p>两种是同一游戏的两套结算外衣：积分制一局一清、节奏快，适合计分比赛；进贡制把输赢拖到下一局兑现，雪球越滚越大，老玩家更爱这一口。同桌只需开局前选定一种，不要混用。</p>
+    </details>
+    <details>
+      <summary>四个人能打够级吗？</summary>
+      <p>经典够级是 6 人局。市面上也有 4 人、5 人的变体（如去掉一门对头、调整副数），规则改动不小。凑不齐 6 人时，建议直接和同桌约定变体口径，或改打其他人数适配的牌戏，免得中途争议。</p>
+    </details>
+  </section>
+
+  <footer class="guide__footer">
+    <p>够级起源于 20 世纪 60 年代的山东青岛沧口一带，是北方流传极广的民间扑克玩法。本指南按经典 4 副牌打法整理，另补枣庄、滕州一带的六副牌带鹰口径；地方细则（副数、鹰的用法、憋 3、买 3、革命、还贡上限等）差异不小，正式开局前请同桌统一口径——牌桌上先说清，比打完再争要体面得多。</p>
+    <p class="guide__notice" id="notice" role="status" aria-live="polite"></p>
+  </footer>
+</main>
