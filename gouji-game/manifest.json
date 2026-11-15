@@ -1,0 +1,19 @@
+{
+  "format": 1,
+  "id": "01900000-0000-7000-8000-000000000000",
+  "name": "够级在线对战",
+  "tags": ["游戏", "卡牌", "多人"],
+  "version": "1.0.0",
+  "entry": "index.html",
+  "script": "app.js",
+  "style": "app.css",
+  "permissions": ["user.read", "theme.read", "storage.read", "storage.write", "network.websocket"],
+  "websockets": {
+    "game": {
+      "url": "wss://api.example.com/gouji",
+      "auth": "platform",
+      "query": ["room"]
+    }
+  },
+  "media": {}
+}

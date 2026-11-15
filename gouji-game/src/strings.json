@@ -1,0 +1,26 @@
+{
+  "en": {
+    "apiError": "Community feature unavailable ({code}).",
+    "connected": "Connected to the community.",
+    "disconnected": "Community unavailable.",
+    "guest": "Guest session.",
+    "guestName": "Guest",
+    "player": "{name} (@{username})",
+    "playerLoading": "Connecting…",
+    "preview": "Local preview · No community connection.",
+    "saveUnreadable": "Saved data could not be read.",
+    "tagline": "Six players, four decks, two federations — play Gouji online."
+  },
+  "zh_CN": {
+    "apiError": "社区功能暂不可用（{code}）。",
+    "connected": "已连接社区",
+    "disconnected": "社区连接不可用",
+    "guest": "访客模式",
+    "guestName": "访客",
+    "player": "{name} (@{username})",
+    "playerLoading": "正在获取玩家资料…",
+    "preview": "本地预览 · 未连接社区",
+    "saveUnreadable": "保存的数据无法读取。",
+    "tagline": "六个人、四副牌、两个联邦——在线打够级。"
+  }
+}

@@ -1,0 +1,122 @@
+<main class="gouji" id="gouji-app">
+  <header class="gouji-header">
+    <div>
+      <h1>够级在线对战</h1>
+      <p class="tagline" data-text="tagline">六个人、四副牌、两个联邦——在线打够级。</p>
+    </div>
+    <div class="header-status">
+      <span id="connection" class="pill">正在连接…</span>
+      <span id="player" class="pill">访客</span>
+    </div>
+  </header>
+
+  <p id="notice" class="notice" role="status"></p>
+
+  <!-- 大厅 -->
+  <section id="lobby" class="panel" aria-label="大厅">
+    <h2>大厅</h2>
+    <div class="mode-row" role="group" aria-label="对战模式">
+      <button type="button" id="mode-ai" class="mode-btn" aria-pressed="true">人机对战</button>
+      <button type="button" id="mode-online" class="mode-btn" aria-pressed="false">在线对战</button>
+    </div>
+    <p id="server-warning" class="warning" hidden>
+      在线服务器尚未配置：manifest 与客户端里的 WSS 地址还是占位符
+      <code>wss://api.example.com/gouji</code>。请先部署服务器并替换地址，或先用人机对战。
+    </p>
+    <div id="online-fields" class="field-grid" hidden>
+      <label>
+        房间代码
+        <input id="room-code" type="text" inputmode="text" autocomplete="off" maxlength="8" placeholder="如 AB12CD" />
+      </label>
+      <label>
+        你的名字
+        <input id="player-name" type="text" autocomplete="off" maxlength="12" placeholder="牌友" />
+      </label>
+      <div class="field-actions">
+        <button type="button" id="create-room">创建房间</button>
+        <button type="button" id="join-room">加入房间</button>
+      </div>
+    </div>
+    <div class="field-grid">
+      <label>
+        牌副
+        <select id="deck-option">
+          <option value="classic4" selected>经典四副牌（216 张）</option>
+          <option value="sixEagle">六副牌带鹰（324 张）</option>
+        </select>
+      </label>
+      <label id="eagle-field" hidden>
+        鹰牌规则（开局前商定）
+        <select id="eagle-mode">
+          <option value="king" selected>鹰为王中王（大于大王）</option>
+          <option value="big-joker">鹰当大王</option>
+          <option value="removed">洗牌前去掉鹰</option>
+        </select>
+      </label>
+    </div>
+    <p class="hint-text">人机对战：你坐 1 号位，五位机器人牌友补满牌桌，立即开局。在线对战：创建或加入房间，空座由机器人补满，1–5 人都能开局。</p>
+    <div class="lobby-actions">
+      <button type="button" id="start-ai" class="primary">开始人机对战</button>
+      <button type="button" id="ready-btn" class="primary" hidden>我准备好了</button>
+    </div>
+    <div id="lobby-seats" class="seat-strip" aria-label="房间座位"></div>
+  </section>
+
+  <!-- 牌桌 -->
+  <section id="table" class="panel" aria-label="牌桌" hidden>
+    <div class="table-top">
+      <div class="scoreboard" id="scoreboard" aria-label="比分"></div>
+      <div class="table-actions">
+        <button type="button" id="rules-toggle">规则</button>
+        <button type="button" id="leave-btn">离开牌桌</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <div id="seats" class="seats" aria-label="六个座位"></div>
+      <div class="center-area">
+        <div id="last-play" class="last-play" aria-label="上家出牌">等待开局…</div>
+        <div id="turn-line" class="turn-line"></div>
+        <div id="round-line" class="round-line"></div>
+      </div>
+    </div>
+
+    <div id="hand" class="hand" aria-label="你的手牌"></div>
+
+    <div class="action-bar">
+      <button type="button" id="play-btn" class="primary" disabled>出牌</button>
+      <button type="button" id="pass-btn" disabled>不要</button>
+      <button type="button" id="burn-btn" disabled>烧牌</button>
+      <button type="button" id="let-btn" disabled>让牌</button>
+      <button type="button" id="revolution-btn" disabled>革命</button>
+      <button type="button" id="hint-btn">提示</button>
+      <button type="button" id="sort-btn">排序</button>
+    </div>
+
+    <div class="table-bottom">
+      <div>
+        <button type="button" id="next-round-btn" class="primary" hidden>下一局</button>
+        <button type="button" id="end-match-btn" hidden>结束本局</button>
+      </div>
+      <div id="game-log" class="log" aria-label="对局记录"></div>
+    </div>
+  </section>
+
+  <!-- 规则速查 -->
+  <section id="rules" class="panel" aria-label="规则速查" hidden>
+    <h2>规则速查（经典四副牌）</h2>
+    <ul>
+      <li>六人两联邦（1、3、5 号 vs 2、4、6 号），逆时针出牌，每人 36 张。</li>
+      <li>牌力：3 &lt; 4 &lt; … &lt; 10 &lt; J &lt; Q &lt; K &lt; A &lt; 2（钱）&lt; 小王 &lt; 大王。没有顺子；出牌为同点数 N 张，可挂 2 / 王。</li>
+      <li>够级牌：5×10、4×J、3×Q、2×K、2×A、1×2、1×小王、1×大王，或挂牌凑够同等张数。只有对头能接，别人只能烧牌。</li>
+      <li>开点：纯够级牌打出后，下一轮须出 4 开点；开局没有纯够级牌即自然点。</li>
+      <li>烧牌：已开点的非对头可出更大的够级牌烧掉；烧牌后每次出牌都要挂王（最后一手除外），断王按大落论处。</li>
+      <li>3 必须最后出（憋 3）；手里没有 2 / 王可以革命，坐下不打，排四科。</li>
+      <li>名次：头科、二科、三科、四科、二落、大落；联邦计分 +4 / +2 / 0 / 0 / −2 / −4，串三户翻倍为 12，联邦负分记 0。</li>
+      <li>进贡：点贡、烧贡、闷贡、落贡（闷 &gt; 烧 &gt; 点 &gt; 落），下一局开局自动换牌。</li>
+      <li>六副牌带鹰：324 张，每人 54 张，鹰牌规则没有统一标准，本局按开局前选定的方式执行。</li>
+    </ul>
+    <p class="hint-text">简化说明：买 3 未实现（没有 3 的玩家正常出牌）；烧牌中途断王按大落论处；进贡牌自动选择最大的王 / 2 / 鹰，没有可贡的牌时免贡。</p>
+    <button type="button" id="rules-close">收起规则</button>
+  </section>
+</main>
