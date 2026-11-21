@@ -89,6 +89,26 @@ def curl_socks_status(socks_url, url, timeout=25):
         return -1, "", repr(e)[:150]
 
 
+def curl_socks_dl(socks_url, url, timeout=30):
+    """经 SOCKS 下载，返回 (rc, 下载字节数, 用时秒)。用 -o /dev/null
+    -w %{size_download} 直接取字节数，不捕获正文，避免二进制解码问题，
+    超时时也能看到部分下载量。"""
+    try:
+        t0 = time.time()
+        out = subprocess.run(
+            ["curl", "-sS", "-o", "/dev/null", "-w", "%{size_download}",
+             "--max-time", str(timeout), "-x", socks_url, url],
+            capture_output=True, text=True, timeout=timeout + 10)
+        dt = time.time() - t0
+        try:
+            n = int((out.stdout or "0").strip())
+        except ValueError:
+            n = 0
+        return out.returncode, n, dt
+    except Exception:
+        return -1, 0, 0.0
+
+
 def main():
     key = load_key()
     status, prov = api_post(
@@ -158,13 +178,19 @@ def main():
         print("*** CLEAN EXIT -- running real tests ***")
         rc_g, code_g, _ = curl_socks_status(socks_url, "https://www.google.com/generate_204")
         rc_x, code_x, _ = curl_socks_status(socks_url, "https://x.com/")
-        t0 = time.time()
-        rc_s, out_s, _ = curl_socks(socks_url, "https://speed.cloudflare.com/__down?bytes=500000", timeout=30)
-        dt = time.time() - t0
-        nbytes = len(out_s.encode()) if rc_s == 0 else 0
-        speed = (nbytes / dt / 1024) if dt > 0 else 0
+        # 测速：失败重试一次（单次下载卡住可能是瞬断），标准不变（>=400KB 才算过）
+        nbytes, dt, speed = 0, 0.0, 0.0
+        for attempt in (1, 2):
+            rc_s, nbytes, dt = curl_socks_dl(
+                socks_url, "https://speed.cloudflare.com/__down?bytes=500000", timeout=30)
+            speed = (nbytes / dt / 1024) if dt > 0 else 0
+            print(f"speed try{attempt}: {nbytes} bytes in {dt:.1f}s = {speed:.0f} KB/s (rc={rc_s})")
+            if nbytes >= 400000:
+                break
+            if attempt == 1:
+                time.sleep(5)
         print(f"generate_204: rc={rc_g} http={code_g} | x.com: rc={rc_x} http={code_x} | "
-              f"500KB in {dt:.1f}s = {speed:.0f} KB/s")
+              f"download {nbytes} bytes in {dt:.1f}s = {speed:.0f} KB/s")
         if not (code_g == "204" and code_x == "200" and nbytes >= 400000):
             print("real tests FAILED -> reject")
             api_post("/network/remove-client", {"client_id": client_id}, key)
